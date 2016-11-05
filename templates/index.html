@@ -1,40 +1,67 @@
 <!doctype html>
+<html ng-app="launchApp">
 <title>Index</title>
 <head>
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
 </head>
-<body>
-<form role="form" action="/launch" method="post">
+<body class="container" ng-controller="launchCtl">
+<form class="form-inline" role="form" action="/svn_copy" method="post">
     <div class="form-group">
-        <label for="version">Version</label>
-        <input type="email" class="form-control" name="version" id="version" placeholder="Version">
+        <div class="input-group">
+            <div class="input-group-addon">请选择要上线的模块:</div>
+            <select class="form-control" id="module_list">
+                <option value="kaochong_mobile_api">kaochong mobile api</option>
+                <option value="kaochong_admin">kaochogn admin</option>
+            </select>
+        </div>
     </div>
     <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">请输入要上线模块的版本:</div>
+            <input type="text" class="form-control" name="version" id="version" placeholder="Version">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">生成新的分支</button>
+</form>
+<form role="form" action="/launch" method="post">
+    <div class="form-group">
         <label for="revision">revision</label>
-        <input type="password" class="form-control" name="revision" id="revision" placeholder="revision">
+        <input type="number" class="form-control" name="revision" id="revision" placeholder="revision">
     </div>
     <div class="form-group">
         <label for="branch_url">branch_url</label>
-        <input type="password" class="form-control" name="branch_url" id="branch_url" placeholder="branch_url">
+        <input type="text" class="form-control" name="branch_url" id="branch_url" placeholder="branch_url">
     </div>
     <div class="form-group">
         <label for="mysql">mysql</label>
-        <textarea class="form-control" name="mysql" id="mysql" placeholder="mysql" rows="3"></textarea>
+        <textarea class="form-control" name="mysql" id="mysql" placeholder="mysql" rows="2"></textarea>
     </div>
     <div class="form-group">
         <label for="redis">redis</label>
-        <textarea class="form-control" name="redis" id="redis" placeholder="redis" rows="3"></textarea>
+        <textarea class="form-control" name="redis" id="redis" placeholder="redis" rows="2"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="preheat">preheat</label>
+        <textarea class="form-control" name="preheat" id="preheat" placeholder="preheat" rows="2"></textarea>
     </div>
     <div class="form-group">
         <label for="other">other</label>
         <textarea class="form-control" name="other" id="other" placeholder="other" rows="3"></textarea>
     </div>
-    <div class="form-group">
-        <label for="function">function</label>
-        <textarea class="form-control" name="function" id="function" placeholder="function" rows="3"></textarea>
-    </div>
+    <!--<div class="form-group">-->
+    <!--<label for="function">function</label>-->
+    <!--<textarea class="form-control" name="function" id="function" placeholder="function" rows="3"></textarea>-->
+    <!--</div>-->
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
 
 </body>
+</html>
+<script>
+    var app = angular.module('launch',[]);
+    app.controller("launchCtl", function ($scope, $http) {
+        alert('hah');
+    });
+</script>

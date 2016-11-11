@@ -1,6 +1,6 @@
 # -*-coding:utf-8-*-
 config = {
     'sender': 'notice@kaochong.com',
-    'password': 'Not1cepass',
+    'password': '***',
     'receivers': ['wangshengyu@kaochong.com'],
 }

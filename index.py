@@ -2,11 +2,16 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import jsonify
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 import config
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+from find_log import find_log
 
 
 def send(message='', subject=''):
@@ -40,6 +45,17 @@ def hello(name=None):
 @app.route("/")
 def index():
     return render_template('index.html')
+
+
+@app.route("/log")
+def log():
+    return render_template('log.html')
+
+
+@app.route("/log/find")
+def log_find():
+    request_id = request.args['request_id']
+    return jsonify({"res":find_log(request_id)})
 
 
 @app.route("/svn_copy")

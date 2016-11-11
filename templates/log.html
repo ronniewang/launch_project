@@ -1,0 +1,43 @@
+<!doctype html>
+<html ng-app="launchApp">
+<title>Index</title>
+<head>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!--<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+</head>
+<body class="container" ng-controller="launchCtl">
+<div class="page-header">
+    <h1>Example page header
+        <small>Subtext for header</small>
+    </h1>
+</div>
+<div class="col-md-2" ng-include="navUrl">
+</div>
+<div class="col-md-10">
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">Request Id：</div>
+                <!--<input type="text" class="form-control" ng-model="{{request_id}}" placeholder="request_id">-->
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="find_log()">查找</button>
+    </form>
+    <p ng-repeat="log in log_lines"></p>
+</div>
+</body>
+</html>
+<script>
+    var app = angular.module('launchApp', []);
+    app.controller("launchCtl", function ($scope, $http) {
+//        alert('hah');
+//        $scope.request_id;
+        $scope.navUrl = "http://locahost:5000/nav.html"
+        $scope.find_log = function () {
+            $http.get("http://locahost:5000/log/find?request_id=456091550").success( function(response) {
+              $scope.line_logs = response;
+            });
+        }
+    });
+</script>
